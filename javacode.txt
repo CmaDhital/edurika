@@ -1,0 +1,265 @@
+public String generateRandom(String type, int size){
+		char [] alpha = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N'};
+		char [] numb = {'1','2','3','4','5','6','7','8','9','0'};
+		char [] select;
+		String value = "";
+		Random rand=new Random();
+		select = type.equals("name") ? alpha : numb;
+		for(int i=0; i<size; i++){
+			value+=select[rand.nextInt(select.length)];
+		}
+		return value;
+	}
+
+private Account generateEachAccount(){
+		common common=new common();
+		Account account=new Account();
+		account.setAccountNumber(Integer.parseInt(common.generateRandom("numb", 9)));
+		account.setBalance(common.generateRandom("num", 5));
+		account.setDescription(common.generateRandom("numb", 10));
+		account.setTypeOfAccount(common.generateRandom("numb", 3));
+		account.setListRoles(new Role().generateListRole());
+		return account;		
+	}
+	
+	public List<Account> listOfAccount(){
+		List<Account>accountlist=new ArrayList<Account>();
+		Random rand=new Random();
+		int randnumb=rand.nextInt(5);
+		for(int i=0; i<randnumb;i++){
+			accountlist.add(generateEachAccount());
+		}
+		return accountlist;
+		
+	}
+
+public AgreementBean() {
+		this.listAgreements = new Agreement().generateListAgreement();
+		//setListAgreements(new Agreement().generateListAgreement());
+	}
+
+
+public List<Agreement> createDummyMirrorList() {
+		List<Agreement> listAgree = new ArrayList<Agreement>(); 
+		for(Agreement eachAgree: getListAgreements()){
+			Agreement agree = new Agreement();
+			List<Account> listAcc = new ArrayList<Account>();
+			for(Account eachAcc : eachAgree.getListAccounts()){
+				Account Acc = new Account();
+				List<Role> listRole = new ArrayList<Role>();
+				for(Role eachRole : eachAcc.getListRoles()){
+					listRole.add(new Role());
+				}
+				Acc.setListRoles(listRole);
+				listAcc.add(Acc);
+			}
+			agree.setListAccounts(listAcc);
+			listAgree.add(agree);
+		}
+		return listAgree;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+JBoss 4,5,6,7,8
+
+controlpanel/system and security/advanced seeting/environmentvariable/new/JAVA_HOME/path where it is installed till bin(jdk)
+jboss/installed folder/bin/standalone.bat/server start
+convert .html file to war.....Go to folder and cmd and type jar -cvf trial.war *  (trial is folder name)
+copy .war file and paste into wildify/standalone/deployment   and goto browser http://localhost:8080/trial
+
+Tomcat
+
+tomcat downlaod and unzip and set system varibale.....tomcat 8/bin/startup.bat or shutdown.bat
+tomcat8/conf/tomcatuser.xml/ <user username=" " password=" "> then goto url:8080 manager app
+
+
+Jenkins
+
+localhost:8080
+manage Jenkins/manage Plugins/search
+
+compile  itemname/ choose freestyle/source code management/git/put git url https://github.com/CmaDhital/shoppingcart.git/build/invoke toop level maven/goal=compile;if code preview put goal=-P metrics pmd:pmd if test then goal=test (then post publish PMD analysis test) for code preview
+
+tortoise svn
+
+create folder right click, svn repository, create new repository
+if you add file right click file tortoise svn and add then do right clickk and svn commit and write
+no .classpath no target no.setting no .project
+for eclipse right click project/team/show history or log or update} java view
+rightclick/team/commit
+we can go to svn repository exploring view too
+team/update to head to get if someone has added in code(do first)
+
+imp
+between two person
+always do synchronize before commit(synchronize will only show changed code between twoo person in same file)
+update will show three file(urs, frns and original)
+override and update will keep changed made by frns. you will loose all ur task
+
+<spring.version>
+<maven.compiler.source>1.8
+<maven.compiler.target>1.8
+</properties>
+
+
+GIT
+git init(in folder)
+git remote add origin "https://github.com/CmaDhital/CalculatorUnitTesting.git"   to go to link where our project is
+git pull origin master(to pull codes from repo online to local)//good habit before push
+git status
+git add filename/git add -A(for all file)
+git commit -m "first commit"/git commit -a -m "commiting all files"
+clear
+git log
+ls to list file
+
+git branch firstbranch(to create branch)
+git checkout firstbranch(to move to that branch from master)
+and if you add any file and do git add and then git commit -m "branch" and ls than we will see that file in that branch but not in master branch
+git switch master then do ls no new file will be there
+
+git checkout master
+git merge firstbranch(always checkout to destination branch where you want to merge) to update master from branch
+
+git pull
+git fetch=git pull+git merge
+
+
+
+
+
+
+
+
+log4j/sl4j(top of the log4j like jpa)top of hibernate
+
+sl4japi
+log4japi
+
+
+<?xml version="1.0"?>
+
+<!DOCTYPE configuration SYSTEM "log4j.dtd">
+
+-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+
+-<appender class="org.apache.log4j.RollingFileAppender" name="CUBICLOG">
+
+<param name="File" value="C://glassfish4//glassfish//domains//domain1//logs//cubic.log"/>
+
+<param name="Append" value="true"/>
+
+<param name="MaxFileSize" value="3000KB"/>
+
+<param name="MaxBackupIndex" value="50"/>
+
+<param name="Threshold" value="DEBUG"/>
+
+
+-<layout class="org.apache.log4j.PatternLayout">
+
+<param name="ConversionPattern" value="%d %-5p %t [%-40.40c] %x - %m%n"/>
+
+</layout>
+
+</appender>
+
+
+-<appender class="org.apache.log4j.RollingFileAppender" name="DAOLOG">
+
+<param name="File" value="C://glassfish4//glassfish//domains//domain1//logs//dao.log"/>
+
+<param name="Append" value="true"/>
+
+<param name="MaxFileSize" value="3000KB"/>
+
+<param name="MaxBackupIndex" value="50"/>
+
+<param name="Threshold" value="DEBUG"/>
+
+
+-<layout class="org.apache.log4j.PatternLayout">
+
+<param name="ConversionPattern" value="%d %-5p %t [%-40.40c] %x - %m%n"/>
+
+</layout>
+
+</appender>
+
+
+-<appender class="org.apache.log4j.RollingFileAppender" name="SPRINGLOG">
+
+<param name="File" value="C://glassfish4//glassfish//domains//domain1//logs//spring.log"/>
+
+<param name="Append" value="true"/>
+
+<param name="MaxFileSize" value="3000KB"/>
+
+<param name="MaxBackupIndex" value="50"/>
+
+<param name="Threshold" value="DEBUG"/>
+
+
+-<layout class="org.apache.log4j.PatternLayout">
+
+<param name="ConversionPattern" value="%d %-5p %t [%-40.40c] %x - %m%n"/>
+
+</layout>
+
+</appender>
+
+
+-<logger name="com.cubic.service">
+
+<appender-ref ref="DAOLOG"/>
+
+<level value="DEBUG"/>
+
+</logger>
+
+
+-<logger name="com.cubic.web.servlet">
+
+<appender-ref ref="CUBICLOG"/>
+
+<level value="DEBUG"/>
+
+</logger>
+
+
+-<logger name="org.springframework">
+
+<appender-ref ref="SPRINGLOG"/>
+
+<level value="DEBUG"/>
+
+</logger>
+
+
+-<root>
+
+<level value="DEBUG"/>
+
+</root>
+
+</log4j:configuration>
+mvn clean install
+
+
+
+
+java
+window-->others> search there
+properties/java buildpath and java compiler

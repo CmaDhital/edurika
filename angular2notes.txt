@@ -1,0 +1,29 @@
+downlaod nodejs
+1)for server to run small application.
+2)for cli we need nodejs
+
+npm install -g @angular/cli
+node -v
+ng new newproject //new folder
+cd newproject //go to folde
+ng server
+npm start
+
+
+
+config:testing
+dist:served as browser/we dont write directly in that folder we managed cli to handle this for us
+e2e:endtoend testing
+dist/vendor:relevant dependency
+public:copy images or any files
+
+main.ts:imp
+index.html:we import main and provide <first-app> to load
+typings.d.ts:bridge for typescript and javascript
+tmp:used by cli
+
+Typescript:
+imports, exports, classes, interface,generics
+documentation support and example based
+
+install typescript:npm install typescript -g
